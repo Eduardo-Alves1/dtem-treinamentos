@@ -1,0 +1,11 @@
+{
+  "project_name": "DTEM Treinamentos",
+  "default_language": "pt-BR",
+  "output_format": "markdown",
+  "ebook_output_dir": "./ebooks",
+  "aulas_output_dir": "./aulas",
+  "atividades_output_dir": "./atividades",
+  "portfolio_output_dir": "./portfolio",
+  "tone": "didatico-profissional",
+  "target_audience": "iniciantes-tech"
+}
