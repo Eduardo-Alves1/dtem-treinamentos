@@ -25,6 +25,7 @@ body {
   font-family: "Inter", Arial, sans-serif;
   color: var(--ink);
   background: var(--bg);
+  overflow-x: hidden;
 }
 
 a {
@@ -69,6 +70,13 @@ a {
   border-radius: 8px;
   color: #fff;
   background: var(--green);
+  box-shadow: 0 10px 28px rgba(15, 118, 110, 0.18);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.brand:hover .brand-mark {
+  transform: translateY(-2px) rotate(-3deg);
+  box-shadow: 0 16px 36px rgba(15, 118, 110, 0.24);
 }
 
 .nav {
@@ -82,7 +90,29 @@ a {
   color: var(--green-dark);
 }
 
+.nav a {
+  position: relative;
+}
+
+.nav a::after {
+  position: absolute;
+  right: 0;
+  bottom: -8px;
+  left: 0;
+  height: 2px;
+  background: var(--green);
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms ease;
+}
+
+.nav a:hover::after {
+  transform: scaleX(1);
+}
+
 .hero {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
   gap: 56px;
@@ -90,6 +120,32 @@ a {
   min-height: calc(100vh - 72px);
   padding: 72px 5vw 56px;
   border-bottom: 1px solid var(--line);
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.hero::before,
+.hero::after {
+  position: absolute;
+  z-index: -1;
+  width: 280px;
+  height: 280px;
+  border: 1px solid rgba(15, 118, 110, 0.16);
+  border-radius: 50%;
+  content: "";
+}
+
+.hero::before {
+  top: 14%;
+  right: 8%;
+  animation: slow-drift 12s ease-in-out infinite;
+}
+
+.hero::after {
+  bottom: 8%;
+  left: -80px;
+  border-color: rgba(228, 93, 72, 0.16);
+  animation: slow-drift 14s ease-in-out infinite reverse;
 }
 
 .hero-content {
@@ -155,6 +211,11 @@ h3 {
   border-radius: 8px;
   font-weight: 800;
   cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
 }
 
 .button.primary {
@@ -165,12 +226,17 @@ h3 {
 
 .button.primary:hover {
   background: var(--green-dark);
+  box-shadow: 0 18px 40px rgba(15, 118, 110, 0.28);
 }
 
 .button.secondary {
   color: var(--ink);
   background: transparent;
   border-color: var(--line);
+}
+
+.button.secondary:hover {
+  border-color: rgba(15, 118, 110, 0.34);
 }
 
 .hero-stats {
@@ -183,6 +249,12 @@ h3 {
   padding: 14px 16px;
   border-left: 4px solid var(--coral);
   background: rgba(255, 250, 242, 0.8);
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.hero-stats div:hover {
+  background: #fffaf2;
+  transform: translateY(-3px);
 }
 
 .hero-stats strong,
@@ -204,6 +276,7 @@ h3 {
   display: grid;
   gap: 18px;
   align-content: center;
+  animation: float-panel 7s ease-in-out infinite;
 }
 
 .workspace-panel {
@@ -211,6 +284,12 @@ h3 {
   border-radius: 8px;
   background: rgba(255, 250, 242, 0.88);
   box-shadow: var(--shadow);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.workspace-panel:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 78px rgba(34, 42, 45, 0.18);
 }
 
 .panel-main {
@@ -245,6 +324,7 @@ h3 {
   height: 11px;
   border-radius: 999px;
   background: var(--line);
+  animation: pulse-dot 2.8s ease-in-out infinite;
 }
 
 .panel-top span:nth-child(1) {
@@ -253,10 +333,12 @@ h3 {
 
 .panel-top span:nth-child(2) {
   background: var(--gold);
+  animation-delay: 180ms;
 }
 
 .panel-top span:nth-child(3) {
   background: var(--green);
+  animation-delay: 360ms;
 }
 
 .flow-card {
@@ -296,6 +378,12 @@ h3 {
   color: #fff;
   font-weight: 800;
   background: var(--blue);
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.flow-grid div:hover {
+  filter: brightness(1.05);
+  transform: translateY(-3px);
 }
 
 .flow-grid div:nth-child(2) {
@@ -334,6 +422,8 @@ h3 {
   height: 100%;
   border-radius: inherit;
   background: var(--green);
+  transform-origin: left;
+  animation: progress-grow 1.2s ease-out both;
 }
 
 .section {
@@ -375,6 +465,15 @@ h3 {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface);
+  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.feature-card:hover,
+.modules article:hover,
+.deliverables div:hover {
+  border-color: rgba(15, 118, 110, 0.26);
+  box-shadow: 0 18px 44px rgba(34, 42, 45, 0.1);
+  transform: translateY(-5px);
 }
 
 .feature-card span {
@@ -411,6 +510,12 @@ h3 {
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.outcome-list div:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateX(5px);
 }
 
 .modules {
@@ -463,6 +568,12 @@ h3 {
   background: var(--surface);
   border: 1px solid var(--line);
   font-weight: 800;
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.bonus-grid span:hover {
+  border-color: rgba(15, 118, 110, 0.28);
+  transform: translateY(-3px);
 }
 
 .cta-section {
@@ -508,6 +619,14 @@ h3 {
   color: var(--ink);
   background: #fff;
   font: inherit;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.lead-form input:focus,
+.lead-form select:focus {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.12);
 }
 
 .lead-form .button {
@@ -529,6 +648,76 @@ h3 {
   padding: 30px 5vw;
   color: var(--muted);
   border-top: 1px solid var(--line);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 650ms ease, transform 650ms ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes float-panel {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.25);
+  }
+}
+
+@keyframes progress-grow {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes slow-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(18px, -18px, 0) scale(1.05);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (max-width: 1020px) {
